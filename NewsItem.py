@@ -4,13 +4,10 @@ import os
 import re
 import Stemmer
 
-from load_xml import load_file
-
-
-
 class NewsItem():
 
     def __init__(self, xml_collection, stop_words, stemmer):
+        self.word_total = 0
         self.terms = Counter()
         self.newsID = ""
         self.xml_collection = xml_collection  # Store for debugging
@@ -25,24 +22,37 @@ class NewsItem():
             if element.content:
                 element_bag = self.bag_of_words(element.content, stemmer)
                 self.terms += element_bag
-
+        self.ordered_terms = dict(self.terms.most_common())
         self.item_size = self.terms.total()
 
-
+    # At the moment website URLs are not removed.
     def clean_content(self, text, stopping_words):
         if not text:
             return text
+        # Remove web links
+        text = re.sub(r'https?://\S+', '', text)
 
+        # Remove (c) symbols (case-insensitive)
+        text = re.sub(r'\(c\)', '', text, flags=re.IGNORECASE)
+
+        # Remove apostrophe-s (e.g., "John's" becomes "John")
+        text = re.sub(r"\'s\b", '', text)
+
+        # Remove plus signs or other unwanted symbols (you can add more if needed)
+        text = re.sub(r'\+', '', text)
         # Clean the content by removing HTML entities and digits
         text = re.sub(r"&quot;", "", text)  # Remove &quot;
         text = re.sub(r"\d+", "", text)    # Remove all numbers
 
-        # Define separators (characters that split the words)
-        separators = r"[,\.\-\:\&\s\(\)\!\*]"
-        words = re.split(separators, text)
+        # Remove punctuation by replacing non-word and non-space characters with a space
+        text = re.sub(r'[^\w\s]', ' ', text)
 
+        # Define separators (characters that split the words)
+        words = re.split(r"\s+", text)
+
+        self.word_total += len(words)
         # Filter out stop words
-        words = [word.strip().lower() for word in words if word.strip().lower() not in stopping_words]
+        words = [word.strip().lower() for word in words if word.strip().lower() not in stopping_words and len(word) > 1]
 
         return words
 
@@ -62,28 +72,12 @@ class NewsItem():
                 bag[stem] += 1
         return bag
 
-    def process_element_tree(self, element, stop_words):
-        """Process an element and all its children recursively"""
-        # Process this element's content
-        if element.content:
-            element_bag = self.bag_of_words(element.content)
-            self.terms += element_bag
-
-        # Process all children
-        for child in element.children:
-            self.process_element_tree(child, stop_words)
-
-    def debug_print_element_tree(self, element, level=0):
-        """Print the element tree structure with content for debugging"""
-        indent = "  " * level
-        print(f"{indent}Tag: {element.tag}")
-        print(f"{indent}Properties: {element.properties}")
-        print(f"{indent}Content (pure text): {element.content}")
-        print(f"{indent}Children count: {len(element.children)}")
-
-        for child in element.children:
-            self.debug_print_element_tree(child, level + 1)
-
+    def __str__(self):
+        output = []
+        output.append("Document " + str(self.newsID) + " contains " + str(self.item_size) + " and has a total " + str(self.word_total) + " words.")
+        for key, value in self.ordered_terms.items():
+            output.append(str(key) + ": " + str(value))
+        return "\n".join(output)
 
 class NewsCollection():
 
@@ -93,6 +87,7 @@ class NewsCollection():
         self.stopwordList = self.load_stopwords(stop_word_path)
         self.stemmer = stemmer
         self.newscollectionlist = self.generate_newscollection(self.files, self.stopwordList)
+        self.my_df = self.df()
 
 
     def generate_newscollection(self, file_contents, stopwordList):
@@ -126,6 +121,20 @@ class NewsCollection():
         content = file.readlines()
         return content
 
+    def df(self):
+        df = Counter()
+        for item in self.newscollectionlist:
+            for term in item.terms.keys():
+                df[term] += 1
+        return df
+
+    def __str__(self):
+        output = []
+        for item in self.newscollectionlist:
+            output.append(str(item))
+        return "\n".join(output)
+
+"""
 stemmer = Stemmer.Stemmer('english')
 newscollection = NewsCollection("RCV1v2", "common-english-words.txt", stemmer)
 
@@ -143,8 +152,4 @@ if newscollection.newscollectionlist:
         if newsitem.newsID == "783803":
             print(newsitem.newsID)
             print(newsitem.terms)
-
-
-
-
-
+"""
