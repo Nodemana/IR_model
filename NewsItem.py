@@ -3,6 +3,7 @@ from XMLElement import XMLCollection, XMLElement
 import os
 import re
 import Stemmer
+import math
 
 class NewsItem():
 
@@ -87,7 +88,14 @@ class NewsCollection():
         self.stopwordList = self.load_stopwords(stop_word_path)
         self.stemmer = stemmer
         self.newscollectionlist = self.generate_newscollection(self.files, self.stopwordList)
-        self.my_df = self.df()
+        self.ndocs = len(self.newscollectionlist)
+        self.raw_df, self.df = self.my_df() # Uses 1 + log(raw_term_count)
+        self.idf = self.my_idf(self.raw_df)
+        for item in self.newscollectionlist:
+            if item.newsID == "783803":
+                self.test = item
+        print(self.test.newsID)
+        self.tf_idf = self.my_tfidf(self.test.terms, self.raw_df, self.ndocs)
 
 
     def generate_newscollection(self, file_contents, stopwordList):
@@ -121,12 +129,46 @@ class NewsCollection():
         content = file.readlines()
         return content
 
-    def df(self):
-        df = Counter()
+    def my_df(self):
+        raw_count = Counter()
+        raw_df = Counter()
+
         for item in self.newscollectionlist:
             for term in item.terms.keys():
-                df[term] += 1
-        return df
+               raw_count[term] += item.terms[term]
+               raw_df[term] += 1
+        df = {}
+        for term in raw_count:
+            df[term] = 1 + math.log(raw_count[term])
+
+        return raw_df, df
+
+    def my_idf(self, raw_df):
+        idf = {}
+
+        for term in raw_df:
+            idf[term] = math.log(self.ndocs / raw_df[term])
+        #print(idf)
+        return idf
+
+    def my_tfidf(self, doc_df, d_f, ndocs, smoothing=1):
+        tf_idf = {}
+        idf = self.my_idf(d_f)
+        for k in doc_df:
+            # Smoothing: add 1 to the counts inside the log to ensure non-zero value
+            numerator = (math.log(doc_df[k] + smoothing) + 1) * idf[k]
+            denominator = 0
+            for x in d_f:
+                denominator += ((math.log(doc_df[x] + smoothing) + 1) * idf[k])**2
+
+            # Check for zero denominator before division
+            if denominator != 0:
+                tf_idf[k] = numerator / denominator
+            else:
+                tf_idf[k] = 0
+        sorted_tf_idf = sorted(tf_idf.items(), key=lambda item: item[1], reverse=True)
+        print(sorted_tf_idf)
+        return sorted_tf_idf
 
     def __str__(self):
         output = []
