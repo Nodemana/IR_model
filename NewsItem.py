@@ -87,23 +87,21 @@ class NewsCollection():
         self.files = self.load_dir(data_dir)
         self.stopwordList = self.load_stopwords(stop_word_path)
         self.stemmer = stemmer
-        self.newscollectionlist = self.generate_newscollection(self.files, self.stopwordList)
-        self.ndocs = len(self.newscollectionlist)
-        self.raw_df, self.df = self.my_df() # Uses 1 + log(raw_term_count)
-        self.idf = self.my_idf(self.raw_df)
-        for item in self.newscollectionlist:
-            if item.newsID == "783803":
-                self.test = item
-        print(self.test.newsID)
-        self.tf_idf = self.my_tfidf(self.test.terms, self.raw_df, self.ndocs)
+        self.newscollectiondict = self.generate_newscollection(self.files, self.stopwordList)
+        self.ndocs = len(self.newscollectiondict)
+        self.df = self.my_df() # Uses 1 + log(raw_term_count)
 
+        self.test = self.newscollectiondict["783803"]["news_item"]
+        print(self.test.newsID)
+        self.tf_idf = self.my_tfidf(self.test.terms, self.df, self.ndocs)
+        self.all_tfidf()
 
     def generate_newscollection(self, file_contents, stopwordList):
-        news_collection = []
+        news_collection = {}
         for content in file_contents:
             xml_collection = XMLCollection(content)
             news_item = NewsItem(xml_collection, stopwordList, self.stemmer)
-            news_collection.append(news_item)
+            news_collection[news_item.newsID] = {"news_item": news_item, "tf_idf": None}
         return news_collection
 
     def load_dir(self, dir_path):
@@ -130,50 +128,77 @@ class NewsCollection():
         return content
 
     def my_df(self):
-        raw_count = Counter()
-        raw_df = Counter()
+        #raw_count = Counter()
+        df = Counter()
 
-        for item in self.newscollectionlist:
-            for term in item.terms.keys():
-               raw_count[term] += item.terms[term]
-               raw_df[term] += 1
-        df = {}
-        for term in raw_count:
-            df[term] = 1 + math.log(raw_count[term])
+        for news_dict in self.newscollectiondict.values():
+            for term in news_dict["news_item"].terms.keys():
+              # raw_count[term] += item.terms[term]
+               df[term] += 1
+        #tf = {}
+        #for term in raw_count:
+        #    tf[term] = 1 + math.log(raw_count[term])
 
-        return raw_df, df
+        return df #, tf
 
-    def my_idf(self, raw_df):
+    # This is redundant, idf is also calculated in my_tfidf
+    def my_idf(self, df):
         idf = {}
 
-        for term in raw_df:
-            idf[term] = math.log(self.ndocs / raw_df[term])
+        for term in df:
+            idf[term] = math.log(self.ndocs / df[term])
         #print(idf)
         return idf
 
-    def my_tfidf(self, doc_df, d_f, ndocs, smoothing=1):
-        tf_idf = {}
-        idf = self.my_idf(d_f)
-        for k in doc_df:
-            # Smoothing: add 1 to the counts inside the log to ensure non-zero value
-            numerator = (math.log(doc_df[k] + smoothing) + 1) * idf[k]
-            denominator = 0
-            for x in d_f:
-                denominator += ((math.log(doc_df[x] + smoothing) + 1) * idf[k])**2
+    def my_tfidf(self, doc, d_f, ndocs):
+        """
+        Compute the normalized TF·IDF weights for one document.
 
-            # Check for zero denominator before division
-            if denominator != 0:
-                tf_idf[k] = numerator / denominator
-            else:
-                tf_idf[k] = 0
-        sorted_tf_idf = sorted(tf_idf.items(), key=lambda item: item[1], reverse=True)
-        print(sorted_tf_idf)
-        return sorted_tf_idf
+        Args:
+          doc    – either a dict {term: freq, …} or a NewsItem with .terms Counter
+          d_f    – dict {term: document_frequency, …}
+          ndocs  – total number of documents in the collection
+
+        Returns:
+          A dict {term: tfidf_weight, …} for all terms in `doc`.
+        """
+        # 1) pull out the raw term frequencies
+        if hasattr(doc, 'terms'):
+            freqs = doc.terms
+        else:
+            freqs = doc
+
+        # 2) build IDF for each term in the vocabulary (Eq. (1)): idf_t = log(N / df_t)
+        idf = {t: math.log(ndocs / d_f[t]) for t in d_f}
+
+        # 3) compute log‐normalized TF for this doc: tf_t = 1 + log(freq_t)  (if freq_t > 0)
+        tf = {t: 1 + math.log(f) for t, f in freqs.items() if f > 0}
+
+        # 4) un‐normalized TF·IDF
+        raw_tfidf = {t: tf[t] * idf[t] for t in tf if t in idf}
+
+        # 5) L₂‐normalize:  ‖v‖₂ = sqrt(∑_k v_k²)
+        norm = math.sqrt(sum(v*v for v in raw_tfidf.values()))
+        if norm > 0:
+            for t in raw_tfidf:
+                raw_tfidf[t] /= norm
+
+        # 6) sort descending by weight and return as an ordered list
+        sorted_list = sorted(raw_tfidf.items(),
+                         key=lambda item: item[1],
+                         reverse=True)
+        return sorted_list
+
+    # Computes tf_idf for all news items in collection
+    def all_tfidf(self):
+        for news_dict in self.newscollectiondict.values():
+            news_dict["tf_idf"] = self.my_tfidf(news_dict["news_item"], self.df, self.ndocs)
+
 
     def __str__(self):
         output = []
-        for item in self.newscollectionlist:
-            output.append(str(item))
+        for item in self.newscollectiondict.values():
+            output.append(str(item["news_item"]))
         return "\n".join(output)
 
 """
