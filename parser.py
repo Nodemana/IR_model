@@ -15,17 +15,30 @@ def Q_Parser(query, stop_words):
     def clean_content(text, stopping_words):
         if not text:
             return text
+        # Remove web links
+        text = re.sub(r'https?://\S+', '', text)
 
+        # Remove (c) symbols (case-insensitive)
+        text = re.sub(r'\(c\)', '', text, flags=re.IGNORECASE)
+
+        # Remove apostrophe-s (e.g., "John's" becomes "John")
+        text = re.sub(r"\'s\b", '', text)
+
+        # Remove plus signs or other unwanted symbols (you can add more if needed)
+        text = re.sub(r'\+', '', text)
         # Clean the content by removing HTML entities and digits
         text = re.sub(r"&quot;", "", text)  # Remove &quot;
         text = re.sub(r"\d+", "", text)    # Remove all numbers
 
+        # Remove punctuation by replacing non-word and non-space characters with a space
+        text = re.sub(r'[^\w\s]', ' ', text)
+
         # Define separators (characters that split the words)
-        separators = r"[,\.\-\:\&\s\(\)\!\*]"
-        words = re.split(separators, text)
+        words = re.split(r"\s+", text)
+
 
         # Filter out stop words
-        words = [word.strip().lower() for word in words if word.strip().lower() not in stopping_words]
+        words = [word.strip().lower() for word in words if word.strip().lower() not in stopping_words and len(word) > 1]
 
         return words
 
@@ -48,4 +61,12 @@ def Q_Parser(query, stop_words):
     stemmer = Stemmer.Stemmer('english')
 
     return bag_of_words(query, stemmer, stop_words)
+
+def Q_Collection(query, collection, stop_words):
+    query_tf = Q_Parser(query, stop_words)
+    query_idf = collection.my_tfidf(query_tf, collection.df, collection.ndocs)
+
+    scores = collection.rank_tfidf(query_idf)
+    return scores
+
 

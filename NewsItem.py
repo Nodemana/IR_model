@@ -26,7 +26,7 @@ class NewsItem():
         self.ordered_terms = dict(self.terms.most_common())
         self.item_size = self.terms.total()
 
-    # At the moment website URLs are not removed.
+
     def clean_content(self, text, stopping_words):
         if not text:
             return text
@@ -184,15 +184,27 @@ class NewsCollection():
                 raw_tfidf[t] /= norm
 
         # 6) sort descending by weight and return as an ordered list
-        sorted_list = sorted(raw_tfidf.items(),
+        sorted_dict = dict(sorted(raw_tfidf.items(),
                          key=lambda item: item[1],
-                         reverse=True)
-        return sorted_list
+                         reverse=True))
+        return sorted_dict
 
     # Computes tf_idf for all news items in collection
     def all_tfidf(self):
         for news_dict in self.newscollectiondict.values():
             news_dict["tf_idf"] = self.my_tfidf(news_dict["news_item"], self.df, self.ndocs)
+
+    def rank_tfidf(self, q_tfidf):
+        scores = {}
+        for newsID in self.newscollectiondict.keys():
+            scores[newsID] = 0
+            for term in q_tfidf.keys():
+                #print(self.newscollectiondict[newsID]["tf_idf"])
+                if term in self.newscollectiondict[newsID]["tf_idf"]:
+                    scores[newsID] += q_tfidf[term] * self.newscollectiondict[newsID]["tf_idf"][term]
+
+        return dict(sorted(scores.items(), key=lambda item: item[1], reverse=True))
+
 
 
     def __str__(self):

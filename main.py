@@ -1,15 +1,18 @@
-from parser import Rev1_Parser, Q_Parser
+from parser import Rev1_Parser, Q_Parser, Q_Collection
 
 def main():
     Rev1_Coll = Rev1_Parser("common-english-words.txt", "RCV1v2")
 
     for news_dict in Rev1_Coll.newscollectiondict.values():
         print(news_dict["news_item"].newsID)
-        if len(news_dict["tf_idf"]) > 30:
-            print(news_dict["tf_idf"][:30])
-        else:
-            print(news_dict["tf_idf"])
+ #       if len(news_dict["tf_idf"]) > 30:
+ #           print(news_dict["tf_idf"][:30])
+  #      else:
+  #          print(news_dict["tf_idf"])
 
+    scores = Q_Collection("ISRAEL: 15 Palestinians, two Israelis killed in clashes.", Rev1_Coll, "common-english-words.txt")
+
+    print(scores)
     #  print(Rev1_Coll)
 
 main()
