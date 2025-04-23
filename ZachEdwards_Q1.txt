@@ -1,4 +1,4 @@
-Document 80283 contains 481 indexing terms and has a total 803 words.
+Document 80283 contains 482 indexing terms and has a total 803 words.
 palestinian: 15
 isra: 13
 gaza: 11
@@ -180,6 +180,7 @@ extend: 1
 boil: 1
 govern: 1
 decid: 1
+al: 1
 aqsa: 1
 dome: 1
 rock: 1
@@ -192,6 +193,7 @@ occupi: 1
 yizhak: 1
 mordechai: 1
 decis: 1
+don: 1
 know: 1
 whether: 1
 final: 1
@@ -290,10 +292,9 @@ seal: 1
 until: 1
 further: 1
 notic: 1
-reuter: 1
 limit: 1
 
-Document 807600 contains 335 indexing terms and has a total 566 words.
+Document 807600 contains 336 indexing terms and has a total 566 words.
 bank: 16
 great: 13
 west: 13
@@ -316,6 +317,7 @@ percent: 4
 up: 4
 power: 4
 toronto: 3
+inc: 3
 canadian: 3
 june: 3
 whether: 3
@@ -344,7 +346,6 @@ independ: 2
 subsidiari: 2
 investor: 2
 trade: 2
-reuter: 2
 lifeco: 1
 surpris: 1
 market: 1
@@ -457,7 +458,7 @@ trader: 1
 bureau: 1
 limit: 1
 
-Document 80282 contains 98 indexing terms and has a total 155 words.
+Document 80282 contains 97 indexing terms and has a total 155 words.
 isra: 7
 palestinian: 7
 gaza: 5
@@ -515,10 +516,9 @@ lieuten: 1
 colonel: 1
 moder: 1
 gunshot: 1
-reuter: 1
 limit: 1
 
-Document 741309 contains 95 indexing terms and has a total 158 words.
+Document 741309 contains 94 indexing terms and has a total 158 words.
 under: 7
 british: 4
 australia: 4
@@ -585,10 +585,9 @@ nicklaus: 1
 nick: 1
 faldo: 1
 mitchel: 1
-reuter: 1
 limit: 1
 
-Document 809481 contains 100 indexing terms and has a total 180 words.
+Document 809481 contains 99 indexing terms and has a total 180 words.
 dynatec: 10
 sherritt: 7
 compani: 5
@@ -602,7 +601,6 @@ toronto: 2
 canadian: 2
 secur: 2
 trade: 2
-reuter: 2
 canada: 1
 tuesday: 1
 wholli: 1
@@ -624,6 +622,7 @@ new: 1
 form: 1
 merger: 1
 consult: 1
+inc: 1
 call: 1
 file: 1
 regul: 1
@@ -656,7 +655,7 @@ activ: 1
 bureau: 1
 limit: 1
 
-Document 809495 contains 409 indexing terms and has a total 735 words.
+Document 809495 contains 408 indexing terms and has a total 735 words.
 israel: 16
 lebanon: 11
 attack: 10
@@ -905,10 +904,9 @@ jihad: 1
 group: 1
 someth: 1
 refus: 1
-reuter: 1
 limit: 1
 
-Document 807606 contains 121 indexing terms and has a total 212 words.
+Document 807606 contains 122 indexing terms and has a total 212 words.
 bid: 9
 bank: 6
 trilon: 5
@@ -927,16 +925,17 @@ tuesday: 2
 percent: 2
 billion: 2
 match: 2
+re: 2
 myhal: 2
 june: 2
 sharehold: 2
 per: 2
 share: 2
-reuter: 2
 financi: 1
 corp: 1
 group: 1
 lifeco: 1
+inc: 1
 posit: 1
 wait: 1
 see: 1
@@ -971,12 +970,13 @@ agre: 1
 bureau: 1
 limit: 1
 
-Document 741299 contains 131 indexing terms and has a total 231 words.
+Document 741299 contains 133 indexing terms and has a total 231 words.
 race: 4
 lehto: 4
 soper: 4
 victori: 4
 hold: 3
+gt: 3
 open: 3
 up: 3
 lead: 3
@@ -1070,11 +1070,9 @@ follow: 1
 power: 1
 steer: 1
 failur: 1
-reuter: 1
 limit: 1
 
-Document 783803 contains 336 indexing terms and has a total 552 words.
-reuter: 10
+Document 783803 contains 340 indexing terms and has a total 552 words.
 french: 10
 pari: 10
 franc: 9
@@ -1083,7 +1081,9 @@ amp: 7
 media: 6
 news: 6
 product: 5
+reuter: 4
 group: 4
+la: 4
 made: 4
 more: 4
 percent: 4
@@ -1101,6 +1101,7 @@ publish: 3
 amauri: 3
 channel: 3
 tribun: 3
+le: 3
 network: 3
 conserv: 3
 name: 2
@@ -1110,6 +1111,7 @@ purchas: 2
 pay: 2
 newspap: 2
 up: 2
+tf: 2
 compani: 2
 prepar: 2
 immedi: 2
@@ -1209,6 +1211,7 @@ portug: 1
 california: 1
 base: 1
 technolog: 1
+inc: 1
 largest: 1
 maker: 1
 gear: 1
@@ -1277,7 +1280,7 @@ brief: 1
 visit: 1
 limit: 1
 
-Document 780718 contains 70 indexing terms and has a total 131 words.
+Document 780718 contains 71 indexing terms and has a total 131 words.
 adopt: 4
 council: 4
 european: 4
@@ -1286,6 +1289,7 @@ direct: 3
 offici: 2
 journal: 2
 content: 2
+oj: 2
 august: 2
 common: 2
 posit: 2
@@ -1314,10 +1318,9 @@ relat: 1
 fertil: 1
 end: 1
 document: 1
-reuter: 1
 limit: 1
 
-Document 79565 contains 544 indexing terms and has a total 893 words.
+Document 79565 contains 545 indexing terms and has a total 893 words.
 palestinian: 19
 isra: 18
 israel: 9
@@ -1537,6 +1540,7 @@ extend: 1
 boil: 1
 likud: 1
 govern: 1
+al: 1
 aqsa: 1
 dome: 1
 rock: 1
@@ -1550,6 +1554,7 @@ defenc: 1
 yizhak: 1
 mordechai: 1
 question: 1
+don: 1
 know: 1
 whether: 1
 final: 1
@@ -1633,10 +1638,9 @@ option: 1
 maof: 1
 contribut: 1
 fall: 1
-reuter: 1
 limit: 1
 
-Document 780723 contains 101 indexing terms and has a total 161 words.
+Document 780723 contains 100 indexing terms and has a total 161 words.
 toronto: 6
 stock: 4
 open: 3
@@ -1653,9 +1657,9 @@ share: 2
 bank: 2
 network: 2
 quarter: 2
-reuter: 2
 tse: 1
 lo: 1
+dji: 1
 london: 1
 ftse: 1
 comex: 1
@@ -1714,7 +1718,7 @@ zajc: 1
 bureau: 1
 limit: 1
 
-Document 79552 contains 51 indexing terms and has a total 83 words.
+Document 79552 contains 50 indexing terms and has a total 83 words.
 isra: 6
 palestinian: 6
 israel: 3
@@ -1740,10 +1744,9 @@ bank: 1
 two: 1
 day: 1
 violenc: 1
-reuter: 1
 limit: 1
 
-Document 783802 contains 86 indexing terms and has a total 142 words.
+Document 783802 contains 85 indexing terms and has a total 142 words.
 fashion: 7
 award: 6
 channel: 5
@@ -1800,10 +1803,9 @@ albert: 1
 hall: 1
 advertis: 1
 newsdesk: 1
-reuter: 1
 limit: 1
 
-Document 80280 contains 425 indexing terms and has a total 677 words.
+Document 80280 contains 426 indexing terms and has a total 677 words.
 isra: 13
 palestinian: 13
 gaza: 10
@@ -2003,6 +2005,7 @@ right: 1
 wing: 1
 govern: 1
 decid: 1
+al: 1
 aqsa: 1
 dome: 1
 rock: 1
@@ -2016,6 +2019,7 @@ defenc: 1
 yizhak: 1
 mordechai: 1
 decis: 1
+don: 1
 know: 1
 whether: 1
 final: 1
@@ -2066,10 +2070,9 @@ issu: 1
 scuttl: 1
 fragil: 1
 talk: 1
-reuter: 1
 limit: 1
 
-Document 79548 contains 244 indexing terms and has a total 409 words.
+Document 79548 contains 243 indexing terms and has a total 409 words.
 palestinian: 17
 isra: 16
 kill: 9
@@ -2182,11 +2185,10 @@ erez: 1
 cross: 1
 fight: 1
 nablus: 1
-reuter: 1
 limit: 1
 Query: FRANCE: Reuters French Advertising & Media Digest - Aug 6
 The parsed query:
-Counter({'franc': 1, 'reuter': 1, 'french': 1, 'advertis': 1, 'media': 1, 'digest': 1, 'aug': 1})
+Counter({'franc': 1, 'french': 1, 'advertis': 1, 'media': 1, 'digest': 1, 'aug': 1})
 
 Query: UK: Britain's Channel 5 to broadcast Fashion Awards.
 The parsed query:

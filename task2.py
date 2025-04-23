@@ -25,10 +25,10 @@ def main():
 
     """
 
-
     Rev1_Coll = Rev1_Parser("common-english-words.txt", "RCV1v2")
 
     # TASK 2.1
+    # It was not clear in the specification if this should be added to the text file or not, so I just left it as print statements.
     print(f"There are {len(Rev1_Coll.newscollectiondict)} documents in this data set and contains {Rev1_Coll.df.total()} terms\n")
     print("The following are the terms' document-frequency:")
     for term in dict(sorted(Rev1_Coll.df.items(), key=lambda item: item[1], reverse=True)).keys():
