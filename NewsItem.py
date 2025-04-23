@@ -1,15 +1,17 @@
 from collections import Counter
-from XMLElement import XMLCollection, XMLElement
+from XMLElement import XMLCollection
+from Q_Parser import Q_Parser
+
 import os
 import re
-import Stemmer
+
 import math
 
 class NewsItem():
 
     def __init__(self, xml_collection, stop_words, stemmer):
-        self.word_total = 0
         self.terms = Counter()
+        self.item_size = 0
         self.newsID = ""
         self.xml_collection = xml_collection  # Store for debugging
         self.stop_words = set(stop_words)
@@ -24,7 +26,7 @@ class NewsItem():
                 element_bag = self.bag_of_words(element.content, stemmer)
                 self.terms += element_bag
         self.ordered_terms = dict(self.terms.most_common())
-        self.item_size = self.terms.total()
+
 
 
     def clean_content(self, text, stopping_words):
@@ -50,8 +52,7 @@ class NewsItem():
 
         # Define separators (characters that split the words)
         words = re.split(r"\s+", text)
-
-        self.word_total += len(words)
+        self.set_size(self.get_size() + len(words))
         # Filter out stop words
         words = [word.strip().lower() for word in words if word.strip().lower() not in stopping_words and len(word) > 1]
 
@@ -73,11 +74,26 @@ class NewsItem():
                 bag[stem] += 1
         return bag
 
+    def add_term(self, term):
+        self.terms += term
+        self.ordered_terms = dict(self.terms.most_common())
+
+
+    def get_size(self):
+        if self.item_size:
+            return self.item_size
+        else:
+            return 0
+
+    def set_size(self, size):
+        self.item_size = size
+
     def __str__(self):
         output = []
-        output.append("Document " + str(self.newsID) + " contains " + str(self.item_size) + " and has a total " + str(self.word_total) + " words.")
+        output.append("Document " + str(self.newsID) + " contains " + str(self.terms.total()) + " indexing terms and has a total " + str(self.get_size()) + " words.")
         for key, value in self.ordered_terms.items():
             output.append(str(key) + ": " + str(value))
+        output.append("\n")
         return "\n".join(output)
 
 class NewsCollection():
@@ -87,13 +103,11 @@ class NewsCollection():
         self.files = self.load_dir(data_dir)
         self.stopwordList = self.load_stopwords(stop_word_path)
         self.stemmer = stemmer
+        self.totalDocLength = 0
         self.newscollectiondict = self.generate_newscollection(self.files, self.stopwordList)
         self.ndocs = len(self.newscollectiondict)
-        self.df = self.my_df() # Uses 1 + log(raw_term_count)
 
-        self.test = self.newscollectiondict["783803"]["news_item"]
-        print(self.test.newsID)
-        self.tf_idf = self.my_tfidf(self.test.terms, self.df, self.ndocs)
+        self.df = self.my_df()
         self.all_tfidf()
 
     def generate_newscollection(self, file_contents, stopwordList):
@@ -102,6 +116,7 @@ class NewsCollection():
             xml_collection = XMLCollection(content)
             news_item = NewsItem(xml_collection, stopwordList, self.stemmer)
             news_collection[news_item.newsID] = {"news_item": news_item, "tf_idf": None}
+            self.totalDocLength += news_item.get_size()
         return news_collection
 
     def load_dir(self, dir_path):
@@ -128,27 +143,12 @@ class NewsCollection():
         return content
 
     def my_df(self):
-        #raw_count = Counter()
         df = Counter()
-
         for news_dict in self.newscollectiondict.values():
             for term in news_dict["news_item"].terms.keys():
-              # raw_count[term] += item.terms[term]
                df[term] += 1
-        #tf = {}
-        #for term in raw_count:
-        #    tf[term] = 1 + math.log(raw_count[term])
 
-        return df #, tf
-
-    # This is redundant, idf is also calculated in my_tfidf
-    def my_idf(self, df):
-        idf = {}
-
-        for term in df:
-            idf[term] = math.log(self.ndocs / df[term])
-        #print(idf)
-        return idf
+        return df
 
     def my_tfidf(self, doc, d_f, ndocs):
         """
@@ -199,12 +199,37 @@ class NewsCollection():
         for newsID in self.newscollectiondict.keys():
             scores[newsID] = 0
             for term in q_tfidf.keys():
-                #print(self.newscollectiondict[newsID]["tf_idf"])
                 if term in self.newscollectiondict[newsID]["tf_idf"]:
                     scores[newsID] += q_tfidf[term] * self.newscollectiondict[newsID]["tf_idf"][term]
 
         return dict(sorted(scores.items(), key=lambda item: item[1], reverse=True))
 
+    def avg_length(self):
+        return self.totalDocLength / self.ndocs
+
+    def my_bm25(self, q, df):
+        scores = {}
+        k_one = 1.2
+        k_two = 100
+        b = 0.75
+        query_tf = Q_Parser(q, self.stopwordList)
+        for newsID in self.newscollectiondict.keys(): #values()["news_item"]:
+            scores[newsID] = 0
+            for term in query_tf.keys():
+                if term in self.newscollectiondict[newsID]["news_item"].ordered_terms:
+                    f_i = self.newscollectiondict[newsID]["news_item"].ordered_terms[term]
+                else:
+                    f_i = 0
+                qf_i = query_tf[term]
+                binary_independence_model = max(0, math.log10((self.ndocs - df[term] + 0.5)/(df[term] + 0.5))) # Restricted negative values to 0
+                K = k_one*((1-b) + b * (self.newscollectiondict[newsID]["news_item"].get_size()/self.avg_length()))
+                term_one = ((k_one + 1) *f_i )/(K + f_i)
+                term_two = ((k_two + 1) *qf_i)/(k_two + qf_i)
+                scores[newsID] += binary_independence_model * term_one * term_two
+        sorted_scores = dict(sorted(scores.items(),
+                         key=lambda item: item[1],
+                         reverse=True))
+        return sorted_scores
 
 
     def __str__(self):

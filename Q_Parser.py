@@ -1,15 +1,23 @@
 import re
-from collections import Counter
 import Stemmer
-from NewsItem import NewsCollection
-
-
-def Rev1_Parser(stop_words, inputfolder):
-    stemmer = Stemmer.Stemmer('english')
-    Rev1_Coll = NewsCollection(inputfolder, stop_words, stemmer)
-    return Rev1_Coll
+from collections import Counter
 
 def Q_Parser(query, stop_words):
+
+    def load_file(file_path):
+        file = open(file_path)
+        content = file.readlines()
+        return content
+
+    def load_stopwords(stop_word_path):
+        words = []
+        if(stop_word_path[-3:] == "txt"):
+            contents = load_file(stop_word_path)
+            for content in contents:
+                words += content.split(",")
+        else:
+            return stop_word_path
+        return words
 
     # At the moment website URLs are not removed.
     def clean_content(text, stopping_words):
@@ -36,21 +44,21 @@ def Q_Parser(query, stop_words):
         # Define separators (characters that split the words)
         words = re.split(r"\s+", text)
 
-
         # Filter out stop words
         words = [word.strip().lower() for word in words if word.strip().lower() not in stopping_words and len(word) > 1]
 
         return words
 
-    def stem_words(words, stemmer):
+    def stem_words(words, stemmer): # , stop_words):
         return stemmer.stemWords(words)
+        #return [s for s in stems if s not in stop_words]
 
 
     def bag_of_words(text, stemmer, stop_words):
         if not text:
             return Counter()
         words = clean_content(text, stop_words)
-        stems = stem_words(words, stemmer)
+        stems = stem_words(words, stemmer) #, stop_words)
         bag = Counter()
         for stem in stems:
             stem = stem.strip()
@@ -59,14 +67,6 @@ def Q_Parser(query, stop_words):
         return bag
 
     stemmer = Stemmer.Stemmer('english')
-
+    stop_words = load_stopwords(stop_words)
     return bag_of_words(query, stemmer, stop_words)
-
-def Q_Collection(query, collection, stop_words):
-    query_tf = Q_Parser(query, stop_words)
-    query_idf = collection.my_tfidf(query_tf, collection.df, collection.ndocs)
-
-    scores = collection.rank_tfidf(query_idf)
-    return scores
-
 

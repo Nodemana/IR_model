@@ -1,0 +1,113 @@
+Average document length for this collection is: 380.5
+The query is: The British-Fashion Awards
+
+The following are the BM25 score for each document:
+Document ID: 783802, Doc Length: 142 -- BM25 Score: 5.054163217340816
+Document ID: 741309, Doc Length: 158 -- BM25 Score: 1.437434865828515
+Document ID: 783803, Doc Length: 552 -- BM25 Score: 0.9316164195656328
+Document ID: 80283, Doc Length: 803 -- BM25 Score: 0.0
+Document ID: 807600, Doc Length: 566 -- BM25 Score: 0.0
+Document ID: 80282, Doc Length: 155 -- BM25 Score: 0.0
+Document ID: 809481, Doc Length: 180 -- BM25 Score: 0.0
+Document ID: 809495, Doc Length: 735 -- BM25 Score: 0.0
+Document ID: 807606, Doc Length: 212 -- BM25 Score: 0.0
+Document ID: 741299, Doc Length: 231 -- BM25 Score: 0.0
+Document ID: 780718, Doc Length: 131 -- BM25 Score: 0.0
+Document ID: 79565, Doc Length: 893 -- BM25 Score: 0.0
+Document ID: 780723, Doc Length: 161 -- BM25 Score: 0.0
+Document ID: 79552, Doc Length: 83 -- BM25 Score: 0.0
+Document ID: 80280, Doc Length: 677 -- BM25 Score: 0.0
+Document ID: 79548, Doc Length: 409 -- BM25 Score: 0.0
+
+For query "The British-Fashion Awards", the top-6 relevant documents are:
+783802 5.054163217340816
+741309 1.437434865828515
+783803 0.9316164195656328
+80283 0.0
+807600 0.0
+80282 0.0
+
+The query is: Rocket attacks
+
+The following are the BM25 score for each document:
+Document ID: 809495, Doc Length: 735 -- BM25 Score: 3.5815792155812396
+Document ID: 80283, Doc Length: 803 -- BM25 Score: 0.0
+Document ID: 807600, Doc Length: 566 -- BM25 Score: 0.0
+Document ID: 80282, Doc Length: 155 -- BM25 Score: 0.0
+Document ID: 741309, Doc Length: 158 -- BM25 Score: 0.0
+Document ID: 809481, Doc Length: 180 -- BM25 Score: 0.0
+Document ID: 807606, Doc Length: 212 -- BM25 Score: 0.0
+Document ID: 741299, Doc Length: 231 -- BM25 Score: 0.0
+Document ID: 783803, Doc Length: 552 -- BM25 Score: 0.0
+Document ID: 780718, Doc Length: 131 -- BM25 Score: 0.0
+Document ID: 79565, Doc Length: 893 -- BM25 Score: 0.0
+Document ID: 780723, Doc Length: 161 -- BM25 Score: 0.0
+Document ID: 79552, Doc Length: 83 -- BM25 Score: 0.0
+Document ID: 783802, Doc Length: 142 -- BM25 Score: 0.0
+Document ID: 80280, Doc Length: 677 -- BM25 Score: 0.0
+Document ID: 79548, Doc Length: 409 -- BM25 Score: 0.0
+
+For query "Rocket attacks", the top-6 relevant documents are:
+809495 3.5815792155812396
+80283 0.0
+807600 0.0
+80282 0.0
+741309 0.0
+809481 0.0
+
+The query is: FRANCE: Reuters French Advertising & Media Digest - Aug 6
+
+The following are the BM25 score for each document:
+Document ID: 783803, Doc Length: 552 -- BM25 Score: 8.16722992589016
+Document ID: 79565, Doc Length: 893 -- BM25 Score: 1.0768555481502753
+Document ID: 783802, Doc Length: 142 -- BM25 Score: 1.0266938282778293
+Document ID: 741299, Doc Length: 231 -- BM25 Score: 0.9096371410028253
+Document ID: 80283, Doc Length: 803 -- BM25 Score: 0.4031404589325617
+Document ID: 807600, Doc Length: 566 -- BM25 Score: 0.0
+Document ID: 80282, Doc Length: 155 -- BM25 Score: 0.0
+Document ID: 741309, Doc Length: 158 -- BM25 Score: 0.0
+Document ID: 809481, Doc Length: 180 -- BM25 Score: 0.0
+Document ID: 809495, Doc Length: 735 -- BM25 Score: 0.0
+Document ID: 807606, Doc Length: 212 -- BM25 Score: 0.0
+Document ID: 780718, Doc Length: 131 -- BM25 Score: 0.0
+Document ID: 780723, Doc Length: 161 -- BM25 Score: 0.0
+Document ID: 79552, Doc Length: 83 -- BM25 Score: 0.0
+Document ID: 80280, Doc Length: 677 -- BM25 Score: 0.0
+Document ID: 79548, Doc Length: 409 -- BM25 Score: 0.0
+
+For query "FRANCE: Reuters French Advertising & Media Digest - Aug 6", the top-6 relevant documents are:
+783803 8.16722992589016
+79565 1.0768555481502753
+783802 1.0266938282778293
+741299 0.9096371410028253
+80283 0.4031404589325617
+807600 0.0
+
+The query is: US EPA ranks Geo Metro car most fuel-efficient 1997 car.
+
+The following are the BM25 score for each document:
+Document ID: 741299, Doc Length: 231 -- BM25 Score: 2.594240953787428
+Document ID: 783803, Doc Length: 552 -- BM25 Score: 1.2765146495589257
+Document ID: 80283, Doc Length: 803 -- BM25 Score: 0.0
+Document ID: 807600, Doc Length: 566 -- BM25 Score: 0.0
+Document ID: 80282, Doc Length: 155 -- BM25 Score: 0.0
+Document ID: 741309, Doc Length: 158 -- BM25 Score: 0.0
+Document ID: 809481, Doc Length: 180 -- BM25 Score: 0.0
+Document ID: 809495, Doc Length: 735 -- BM25 Score: 0.0
+Document ID: 807606, Doc Length: 212 -- BM25 Score: 0.0
+Document ID: 780718, Doc Length: 131 -- BM25 Score: 0.0
+Document ID: 79565, Doc Length: 893 -- BM25 Score: 0.0
+Document ID: 780723, Doc Length: 161 -- BM25 Score: 0.0
+Document ID: 79552, Doc Length: 83 -- BM25 Score: 0.0
+Document ID: 783802, Doc Length: 142 -- BM25 Score: 0.0
+Document ID: 80280, Doc Length: 677 -- BM25 Score: 0.0
+Document ID: 79548, Doc Length: 409 -- BM25 Score: 0.0
+
+For query "US EPA ranks Geo Metro car most fuel-efficient 1997 car.", the top-6 relevant documents are:
+741299 2.594240953787428
+783803 1.2765146495589257
+80283 0.0
+807600 0.0
+80282 0.0
+741309 0.0
+
