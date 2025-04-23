@@ -1,6 +1,13 @@
-from Parser import Rev1_Parser
+from src.Parser import Rev1_Parser
 
 def main():
+
+    # TASK 3.1
+    # Please see function avg_length in NewsCollection class in src/NewsItem.py
+
+    # TASK 3.2
+    # Please see function my_bm25 in NewsCollection class in src/NewsItem.py
+
     Rev1_Coll = Rev1_Parser("common-english-words.txt", "RCV1v2")
 
     #TASK 3.3

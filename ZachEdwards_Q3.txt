@@ -58,11 +58,11 @@ For query "Rocket attacks", the top-6 relevant documents are:
 The query is: FRANCE: Reuters French Advertising & Media Digest - Aug 6
 
 The following are the BM25 score for each document:
-Document ID: 783803, Doc Length: 552 -- BM25 Score: 8.16722992589016
+Document ID: 783803, Doc Length: 552 -- BM25 Score: 8.167229925890162
 Document ID: 79565, Doc Length: 893 -- BM25 Score: 1.0768555481502753
-Document ID: 783802, Doc Length: 142 -- BM25 Score: 1.0266938282778293
+Document ID: 783802, Doc Length: 142 -- BM25 Score: 1.0266938282778295
 Document ID: 741299, Doc Length: 231 -- BM25 Score: 0.9096371410028253
-Document ID: 80283, Doc Length: 803 -- BM25 Score: 0.4031404589325617
+Document ID: 80283, Doc Length: 803 -- BM25 Score: 0.4031404589325616
 Document ID: 807600, Doc Length: 566 -- BM25 Score: 0.0
 Document ID: 80282, Doc Length: 155 -- BM25 Score: 0.0
 Document ID: 741309, Doc Length: 158 -- BM25 Score: 0.0
@@ -76,11 +76,11 @@ Document ID: 80280, Doc Length: 677 -- BM25 Score: 0.0
 Document ID: 79548, Doc Length: 409 -- BM25 Score: 0.0
 
 For query "FRANCE: Reuters French Advertising & Media Digest - Aug 6", the top-6 relevant documents are:
-783803 8.16722992589016
+783803 8.167229925890162
 79565 1.0768555481502753
-783802 1.0266938282778293
+783802 1.0266938282778295
 741299 0.9096371410028253
-80283 0.4031404589325617
+80283 0.4031404589325616
 807600 0.0
 
 The query is: US EPA ranks Geo Metro car most fuel-efficient 1997 car.

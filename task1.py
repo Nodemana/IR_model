@@ -1,5 +1,5 @@
-from Parser import Rev1_Parser
-from Q_Parser import Q_Parser
+from src.Parser import Rev1_Parser
+from src.Q_Parser import Q_Parser
 
 
 def main():
@@ -9,10 +9,31 @@ def main():
     within the document after special characters, numbers, punctuation and
     web links have been removed. But before stop words have been removed.
 
-    Terms are the stemmed remaining words after stop words have been removed.
-    This has been done with the porter
+    The definition of a term is dependent on the algorithm used to determine
+    them. In this specific case terms are a subset of words that group
+    morphological variants (e.g jumps or jumped) under a common representation
+    (e.g jump). Terms also preserve partial semantic meaning but loses
+    gramatical nuance (happily preserves happy but loses -ly).
+    The terms in this project were produced by first removing words which lack
+    standalone semantic meaning such as "the" or "of". Then the porter2 stemming
+    algorithm was applied to the remaining words to create a list of terms which
+    abide by the definition defined above.
+
+    The stop words used can be seen in "common-english-words.txt".
+    Added stop words were:
+    reuters, couldn, wouldn, shouldn
+
+    reuters is in every document as each document is a Reuters news artical,
+    which means that this word adds no meaning and can be removed.
+
+    "could, wouldn and shouldn" were removed as after the apostraphes are
+    removed and replaced with spaces these terms are left and provide little
+    to no meaning.
 
     """
+
+    #TASK 1.2
+    # Please see Q_Parser function in src/Q_Parser.py
 
     # TASK 1.3
     Q1_queries = ["FRANCE: Reuters French Advertising & Media Digest - Aug 6", "UK: Britain's Channel 5 to broadcast Fashion Awards.", "ISRAEL: Shooting, protests spread in Gaza, West Bank"]

@@ -1,8 +1,6 @@
-import re
-from collections import Counter
 import Stemmer
-from NewsItem import NewsCollection
-from Q_Parser import Q_Parser
+from .NewsItem import NewsCollection
+from .Q_Parser import Q_Parser
 
 def Rev1_Parser(stop_words, inputfolder):
     stemmer = Stemmer.Stemmer('english')
