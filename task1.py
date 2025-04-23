@@ -21,12 +21,12 @@ def main():
 
     The stop words used can be seen in "common-english-words.txt".
     Added stop words were:
-    reuters, couldn, wouldn, shouldn
+    reuters, couldn, wouldn, shouldn, aren
 
     reuters is in every document as each document is a Reuters news artical,
     which means that this word adds no meaning and can be removed.
 
-    "could, wouldn and shouldn" were removed as after the apostraphes are
+    "couldn, wouldn, shouldn and aren" were removed as after the apostraphes are
     removed and replaced with spaces these terms are left and provide little
     to no meaning.
 
