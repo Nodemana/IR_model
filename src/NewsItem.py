@@ -22,7 +22,7 @@ class NewsItem():
         self.item_size = 0
         self.newsID = ""
         self.stop_words = set(stop_words)
-        print(self.stop_words)
+
         # Process each element in the XML tree
         for element in xml_collection.elements:
             if element.tag == "newsitem":
@@ -34,7 +34,7 @@ class NewsItem():
 
     def clean_content(self, text, stopping_words):
         """
-        Normalize raw text:
+        Normalise raw text:
         - Remove URLs, HTML entities, digits, and unwanted symbols
         - Split into words, lowercase, strip punctuation
         - Filter out stop-words and single-character tokens

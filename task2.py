@@ -55,7 +55,7 @@ def main():
 
             f.write("\n")
 
-        Q2_queries = ["FRANCE: Reuters French Advertising & Media Digest - Aug 6", "UK: Britain's Channel 5 to broadcast Fashion Awards.", "ISRAEL: Shooting, protests spread in Gaza, West Bank"]
+        Q2_queries = ["FRANCE: Reuters French Advertising & Media Digest - Aug 6", "UK: Britain's Channel 5 to broadcast Fashion Awards.", "ISRAEL: Shooting, protests spread in Gaza, West Bank", "ISRAEL: Death toll 33 Arabs, 10 Israelis at 1400 gmt."]
 
         for query in Q2_queries:
             scores = Q_Collection(query, Rev1_Coll, "common-english-words.txt")
